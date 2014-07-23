@@ -20,7 +20,7 @@ describe CatsController do
 
   describe 'POST :create' do
     before { @cat_attributes = attributes_for(:cat) }
-    it 'cucceeds when all attributes are set' do
+    it 'succeeds when all attributes are set' do
       post_cat :created
       data = JSON.parse(response.body)
       expect(data).to have_key('name')
