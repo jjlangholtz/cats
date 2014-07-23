@@ -4,6 +4,7 @@ ruby '2.1.2'
 
 gem 'byebug'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'dragonfly'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'pg'
@@ -19,6 +20,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'annotate'
   gem 'rspec-rails', '~> 3.0.1'
 end
 
@@ -27,4 +29,5 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
+  gem 'shoulda-matchers'
 end
