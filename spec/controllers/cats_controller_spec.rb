@@ -1,13 +1,30 @@
 require 'rails_helper'
 
 describe CatsController do
-  it 'GET :index' do
-    cats = create_list(:cat, 2)
-    get :index, format: :json
-    data = JSON.parse(response.body)
-    expect(data.size).to eq 2
-    expect(data.first).to have_key('name')
-    expect(data.first['name']).to eq cats.first.name
+  describe 'GET :index' do
+    before { @cats = create_list(:cat, 3) }
+    it 'responds with all cats when no ids are sent' do
+      get :index, format: :json
+      data = JSON.parse(response.body)
+      expect(data.size).to eq 3
+      expect(data.first).to have_key('name')
+      expect(data.first['name']).to eq @cats.first.name
+    end
+
+    it 'responds with cats that match the ids sent' do
+      get :index, cat_ids: [@cats[1].id, @cats[2].id], format: :json
+      data = JSON.parse(response.body)
+      expect(data.size).to eq 2
+      expect(data.first['name']).to eq @cats.second.name
+      expect(data.second['name']).to eq @cats.third.name
+    end
+
+    it 'responds with all cats after since id' do
+      get :index, since_id: @cats[1].id, format: :json
+      data = JSON.parse(response.body)
+      expect(data.size).to eq 1
+      expect(data.first['name']).to eq @cats.third.name
+    end
   end
 
   it 'GET :show' do

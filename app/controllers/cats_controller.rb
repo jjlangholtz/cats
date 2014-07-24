@@ -7,7 +7,13 @@ class CatsController < ApplicationController
   end
 
   def index
-    @cats = Cat.all
+    if params[:cat_ids]
+      @cats = Cat.find(params[:cat_ids])
+    elsif params[:since_id]
+      @cats = Cat.where(id: (params[:since_id] + 1)..(Cat.last.id))
+    else
+      @cats = Cat.all
+    end
     respond_with @cats
   end
 
