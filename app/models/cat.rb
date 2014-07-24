@@ -16,4 +16,10 @@
 class Cat < ActiveRecord::Base
   dragonfly_accessor :image
   validates :name, :bio, :breed, :catchphrase, presence: true
+
+  def as_json(options = {} )
+    data = { name: name, breed: breed, bio: bio, catchphrase: catchphrase }
+    data[:image_url] = image.url if image
+    data
+  end
 end

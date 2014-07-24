@@ -25,6 +25,15 @@ describe CatsController do
       expect(data.size).to eq 1
       expect(data.first['name']).to eq @cats.third.name
     end
+
+    it 'serves image urls instead of uids' do
+      create(:cat, image: 'cat.jpg')
+      get :index, format: :json
+      data = JSON.parse(response.body)
+      expect(data.fourth).to have_key('image_url')
+      expect(data.fourth).not_to have_key('image_uid')
+    end
+
   end
 
   it 'GET :show' do
