@@ -8,6 +8,7 @@ Dragonfly.app.configure do
   secret "8135654bd7d629861ff64097f93d3134578f64d89d55c8245af550976266f0be"
 
   url_format "/media/:job/:name"
+  url_host 'http://localhost:3000'
 
   datastore :file,
     root_path: Rails.root.join('public/system/dragonfly', Rails.env),
