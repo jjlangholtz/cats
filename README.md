@@ -4,13 +4,13 @@ API for serving cats just the way you want them.
 ## Installation
 This application uses Postgres.
 
-'''
+```
 bundle install
-'''
+```
 
-'''
+```
 rake db:create db:migrate
-'''
+```
 
 ## Contribute
 
